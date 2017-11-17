@@ -1,32 +1,29 @@
 jobs:
 
-- name: setStorageBase
-  job:
-    set:
-      val: 5
+- name: setStorage
+  set:
+      val: 17
 
 - name: deployStorageK
-  job:
-    deploy:
+  deploy:
       contract: idi.sol
-      wait: true
+      instance: all
 
 - name: setStorage
-  job:
-    call:
+  call:
       destination: $deployStorageK
-      data: set $setStorageBase
-      wait: true
+      function: set
+      data:
+        - $setStorage
 
 - name: queryStorage
-  job:
-    query-contract:
+  query-contract:
       destination: $deployStorageK
-      data: get
+      function: get
 
 - name: assertStorage
-  job:
-    assert:
+  assert:
       key: $queryStorage
       relation: eq
-      val: $setStorageBase
+      val: $setStorage
+

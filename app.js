@@ -1,7 +1,7 @@
 // requires
 var fs = require ('fs');
 var prompt = require('prompt');
-var erisC = require('eris-contracts');
+var erisC = require('@monax/legacy-contracts');
 
 // NOTE. On Windows/OSX do not use localhost. find the
 // url of your chain with:
@@ -14,7 +14,7 @@ var chain_id = process.env.chain_id
 
 
 // get the abi and deployed data squared away
-var contractData = require('./jobs_output.json');
+var contractData = require('./epm.output.json');
 var idisContractAddress = contractData["deployStorageK"];
 console.log(idisContractAddress)
 var idisAbi = JSON.parse(fs.readFileSync("./abi/" + idisContractAddress));
